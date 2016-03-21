@@ -117,6 +117,8 @@
     // This method tests password strength
     owasp.test = function(password) {
 
+      password = password || '';
+
       // create an object to store the test results
       var result = {
         errors              : [],

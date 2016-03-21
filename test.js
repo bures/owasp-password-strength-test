@@ -3,6 +3,11 @@ var owasp  = require('./owasp-password-strength-test');
 
 describe('passwords', function() {
 
+  it('should not fail when password is undefined', function() {
+       var result = owasp.test();
+       result.strong.should.be.false;
+  });
+
   describe('required tests', function() {
 
     it('minLength should be enforced', function() {
