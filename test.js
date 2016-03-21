@@ -115,6 +115,28 @@ describe('passphrases', function() {
 
 });
 
+
+describe('translate', function() {
+
+    owasp.config({
+        translate: {
+            minLength: function(minLength) { return 'Passordet må minst vœre ' + minLength + ' tegn.'; },
+            maxLength: function(maxLength) { return 'Passordet kan maks vœre ' + maxLength + ' tegn.'; },
+            repeat: 'Passordet kan ikke innholde tre eller mer like tegn etter hverandre.',
+            lowercase: 'Passordet må inneholde minst en liten bokstav.',
+            uppercase: 'Passordet må inneholde minst en stor bokstav.',
+            number: 'Passordet må minst inneholde et nummer.',
+            special: 'Passordet må minst inneholde et spesialtegn'
+        }
+    });
+
+    it('should return the translated texts', function() {
+        var result = owasp.test('');
+        result.errors.should.matchEach(function(value) { value.should.be.containEql('Passordet') });
+    });
+
+});
+
 describe('configs', function() {
 
   it('should be settable', function() {
@@ -124,12 +146,16 @@ describe('configs', function() {
       minLength              : 5,
       minPhraseLength        : 5,
       minOptionalTestsToPass : 5,
+      translate: {
+          minLength: function(minLength) { return 'Passordet må minst vœre ' + minLength + ' tegn.'; }
+      }
     });
     owasp.configs.allowPassphrases.should.be.false;
     owasp.configs.maxLength.should.be.exactly(5);
     owasp.configs.minLength.should.be.exactly(5);
     owasp.configs.minPhraseLength.should.be.exactly(5);
     owasp.configs.minOptionalTestsToPass.should.be.exactly(5);
+    owasp.configs.translate.minLength.should.be.Function;
   });
 
   it('should reject invalid parameter keys', function() {
