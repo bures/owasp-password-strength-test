@@ -142,6 +142,15 @@ describe('translate', function() {
 
 });
 
+describe('instance', function() {
+
+    it('create should return a new instance', function() {
+        var inst = owasp.create();
+        owasp.should.not.equal(inst);
+    });
+
+});
+
 describe('configs', function() {
 
   it('should be settable', function() {
