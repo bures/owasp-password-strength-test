@@ -96,7 +96,7 @@
           // require at least one uppercase letter
           function(password) {
             if (!/[A-Z]/.test(password)) {
-              return owasp.configs.translate.lowercase;
+              return owasp.configs.translate.uppercase;
             }
           },
   
